@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "outDir": "dist", // Location to store the output files
+    "module": "NodeNext", // ESM for Node.js (ES Modules)
+    "target": "ESNext", // Use the latest ECMAScript features
+    "strict": true,
+    "esModuleInterop": true, // Enables compatibility for importing CommonJS modules
+    "noImplicitAny": false,
+    "resolveJsonModule": true, // Allows importing JSON files as modules
+    "skipLibCheck": true // Skips type-checking of declaration files (optional, helps speed up the compilation)
+  },
+  "include": [
+    "src"
+  ], // Source files to be compiled
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/types"
+  ]
+}
