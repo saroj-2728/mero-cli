@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "npm run build && npx mero-cli check"
+    "dev": "npm run build && npx mero-cli update"
   },
   "keywords": [],
   "author": "",

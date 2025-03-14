@@ -5,6 +5,7 @@ import { checkAvailableOptions } from './scrape/checkAvailableOptions.js';
 import { showUserInfo } from './commands/showUserInfo.js';
 import { saveUserInfo } from './commands/saveUserInfo.js';
 import { applyForIPO } from './commands/applyForIPO.js';
+import { updateUserInfo } from './commands/updateUserInfo.js';
 
 const program = new Command();
 
@@ -30,11 +31,8 @@ program
 program
   .command('save')
   .description('Save login information')
-  .option('-d, --dp <dp>', 'Depository Participant ID')
-  .option('-u, --username <username>', 'Username for login')
-  .option('-p, --password <password>', 'Password for login')
   .action(async (opts) => {
-    await saveUserInfo(opts)
+    await saveUserInfo()
   });
 
 
@@ -42,8 +40,19 @@ program
 program
   .command('show')
   .description('Show saved login information')
+  .option('-p, --password', 'Show password')
+  .action(async (otps) => {
+    await showUserInfo(otps?.password);
+  });
+
+
+// Command to update login information
+program
+  .command('update')
+  .description('Update saved login information')
   .action(async () => {
-    await showUserInfo();
+    await updateUserInfo();
+    process.exit(0)
   });
 
 
@@ -61,8 +70,9 @@ program
 program
   .command('apply')
   .description('Apply for IPO')
-  .action(async () => {
-    await applyForIPO();
+  .option('-a, --all', 'Apply for all available users')
+  .action(async (opts) => {
+    await applyForIPO(opts);
   });
 
 

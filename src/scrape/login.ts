@@ -15,7 +15,7 @@ export const login = async (
     const page = await browser.newPage();
 
     // Set a realistic viewport
-    await page.setViewport({ width: 1366, height: 768 });
+    // await page.setViewport({ width: 1366, height: 768 });
 
     // Add user agent to avoid detection
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
@@ -32,7 +32,7 @@ export const login = async (
     await page.click('.select2-container');
 
     await page.waitForSelector('.select2-search__field');
-    await page.type('.select2-search__field', "Siddhartha Capital");
+    await page.type('.select2-search__field', dp);
 
     await page.waitForSelector('.select2-results__option');
     await page.click('.select2-results__option');

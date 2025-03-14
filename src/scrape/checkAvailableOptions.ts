@@ -8,15 +8,17 @@ import { showUserInfo } from "../commands/showUserInfo.js";
 import { loadCredentials } from "../config.js";
 
 import type { CompanyInfo } from "../types/companyInfo.js";
+import { Credentials } from "../types/credentials.js";
 
 
 export const checkAvailableOptions = async (): Promise<{
     page: puppeteer.Page;
     browser: puppeteer.Browser;
     companies: CompanyInfo[];
+    creds: { crnNumber: string; pin: string; }
 } | undefined> => {
 
-    showUserInfo();
+    showUserInfo(null);
 
     const credentials = await loadCredentials();
 
@@ -38,10 +40,20 @@ export const checkAvailableOptions = async (): Promise<{
         },
     ]);
 
-    const { username, password, dp } = credentials[selectedIndex];
+    const session = await listCompanies(credentials[selectedIndex]);
+    return session
+}
 
+
+export const listCompanies = async (credentials: Credentials): Promise<{
+    page: puppeteer.Page;
+    browser: puppeteer.Browser;
+    companies: CompanyInfo[];
+    creds: { crnNumber: string; pin: string; }
+} | undefined> => {
     try {
-        const session = await login(username, password, dp);
+        const session = await login(credentials.username, credentials.password, credentials.dp);
+        const creds = { crnNumber: credentials.crnNumber, pin: credentials.pin };
 
         if (!session) {
             console.log(chalk.red('Login failed. Please check your credentials and try again.'));
@@ -63,11 +75,12 @@ export const checkAvailableOptions = async (): Promise<{
         console.log(chalk.green('Companies: '));
         console.table(companies);
 
-        return { page, browser, companies };
+        return { creds, page, browser, companies };
 
     }
     catch (err) {
-
+        console.error('Error checking available options:', err);
+        return;
     }
 }
 
