@@ -21,7 +21,7 @@ export const updateUserInfo = async (): Promise<void> => {
         {
             type: 'number',
             name: 'selectedIndex',
-            message: 'Which information would you like to update?',
+            message: 'Which information would you like to update? (Enter index number)',
             validate: (input) => {
                 const num = Number(input);
                 return num >= 0 && num < credentials?.length ? true : "Invalid selection.";
@@ -38,24 +38,28 @@ export const updateUserInfo = async (): Promise<void> => {
             name: 'username',
             message: 'Enter your username:',
             default: selectedCredential.username,
+            validate: (input) => input ? true : 'Username cannot be empty.',
         },
         {
             type: 'input',
             name: 'password',
             message: 'Enter your password:',
             default: selectedCredential.password,
+            validate: (input) => input ? true : 'Password cannot be empty.',
         },
         {
             type: 'input',
             name: 'dp',
             message: 'Enter your Depository Participant ID:',
             default: selectedCredential.dp,
+            validate: (input) => input ? true : 'Depository Participant ID cannot be empty.',
         },
         {
             type: 'input',
             name: 'crnNumber',
             message: 'Enter your CRN Number:',
             default: selectedCredential.crnNumber,
+            validate: (input) => input ? true : 'CRN Number cannot be empty.',
         },
         {
             type: 'input',
@@ -74,8 +78,11 @@ export const updateUserInfo = async (): Promise<void> => {
     console.log(chalk.green('Updated information:'));
     console.table(answers);
 
-    await saveCredentials(answers);
-    console.log(chalk.green('Login information updated successfully!'));
-
-    console.log(chalk.yellow(':'));
+    try {
+        await saveCredentials(answers);
+        console.log(chalk.green('Login information updated successfully!'));
+    }
+    catch (err: any) {
+        console.log(chalk.red('Error updating login information!', err?.message));
+    }
 }

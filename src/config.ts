@@ -6,7 +6,7 @@ import type { Credentials } from './types/credentials.js';
 // Get the directory name using import.meta.url in ES module
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const configFilePath = path.join(__dirname, 'config.json');
+const configFilePath = path.join(__dirname, 'assets', 'config.json');
 
 
 // Function to save credentials for a specific user
@@ -30,6 +30,9 @@ export const saveCredentials = async (newCreds: Credentials) => {
       // Add new user
       credentials.push(newCredential);
     }
+
+    const assetsDir = path.dirname(configFilePath);
+    await fs.ensureDir(assetsDir); // Create the directory if it doesn't exist
 
     await fs.writeJson(configFilePath, credentials, { spaces: 2 });
     console.log('Credentials saved!');

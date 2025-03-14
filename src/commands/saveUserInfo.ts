@@ -10,21 +10,25 @@ export const getUserInfo = async (): Promise<Credentials> => {
             type: 'input',
             name: 'username',
             message: 'Enter your username:',
+            validate: (input) => input ? true : 'Username cannot be empty.',
         },
         {
             type: 'input',
             name: 'password',
             message: 'Enter your password:',
+            validate: (input) => input ? true : 'Password cannot be empty.',
         },
         {
             type: 'input',
             name: 'dp',
             message: 'Enter your Depository Participant ID:',
-        }, 
+            validate: (input) => input ? true : 'Depository Participant ID cannot be empty.',
+        },
         {
             type: 'input',
             name: 'crnNumber',
             message: 'Enter your CRN Number:',
+            validate: (input) => input ? true : 'CRN Number cannot be empty.',
         },
         {
             type: 'input',
@@ -42,9 +46,14 @@ export const getUserInfo = async (): Promise<Credentials> => {
 };
 
 export const saveUserInfo = async (): Promise<void> => {
-    const credentials = await getUserInfo();
+    try {
+        const credentials = await getUserInfo();
 
-    await saveCredentials(credentials);
+        await saveCredentials(credentials);
 
-    console.log(chalk.green('Login information saved successfully!'));
+        console.log(chalk.green('Login information saved successfully!'));
+    }
+    catch (err: any) {
+        console.log(chalk.red('Error saving login information:'), err?.message);
+    }
 }

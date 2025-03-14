@@ -14,9 +14,6 @@ export const login = async (
     });
     const page = await browser.newPage();
 
-    // Set a realistic viewport
-    // await page.setViewport({ width: 1366, height: 768 });
-
     // Add user agent to avoid detection
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
 
@@ -45,8 +42,8 @@ export const login = async (
 
     return { page, browser };
   }
-  catch (err) {
-    console.error('Login automation error:', err);
+  catch (err: any) {
+    console.error('Login automation error:', err?.message);
     return undefined;
   }
 };

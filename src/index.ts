@@ -52,7 +52,6 @@ program
   .description('Update saved login information')
   .action(async () => {
     await updateUserInfo();
-    process.exit(0)
   });
 
 

@@ -1,11 +1,11 @@
 {
   "name": "mero-cli",
   "version": "1.0.0",
-  "description": "A CLI tool for filling forms automatically",
+  "description": "A CLI tool for filling IPO forms automatically",
   "main": "src/index.ts",
   "type": "module",
   "bin": {
-    "mero-cli": "dist/index.js"
+    "mero-cli": "./dist/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,7 +17,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.8.3",
     "chalk": "^5.4.1",
     "cheerio": "^1.0.0",
     "commander": "^13.1.0",
