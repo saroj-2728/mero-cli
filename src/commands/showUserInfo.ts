@@ -12,11 +12,11 @@ export const showUserInfo = async (showPassword: string | null): Promise<void> =
                     credential.pin = credential.pin.replace(/./g, '*');
                 });
             }
-            console.log(chalk.green('Saved Login Information:'));
+            console.log(chalk.green('Saved Credentials:'));
             console.table(credentials)
         }
         else {
-            console.log(chalk.red('No login information found.'));
+            console.log(chalk.red('No saved credentials found. Use the command: mero-cli save to save credentials.'));
         }
     }
     catch (err: any) {

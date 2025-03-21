@@ -18,13 +18,13 @@ export const checkAvailableOptions = async (): Promise<{
     creds: { crnNumber: string; pin: string; }
 } | undefined> => {
     try {
-        showUserInfo(null);
+        await showUserInfo(null);
 
         const credentials = await loadCredentials();
 
         if (!credentials || credentials.length === 0) {
             console.log(chalk.red("No saved credentials found. Please save credentials first."));
-            console.log("Help:\n Use the command: mero-cli save -u <username> -p <password> -d <depository-participant-id>");
+            console.log("Help:\n Use the command: mero-cli save");
             return;
         }
 
@@ -62,7 +62,7 @@ export const listCompanies = async (credentials: Credentials): Promise<{
 
         if (!session) {
             console.log(chalk.red('Login failed. Please check your credentials and try again.'));
-            return
+            return;
         }
 
         const { page, browser } = session
@@ -72,7 +72,18 @@ export const listCompanies = async (credentials: Credentials): Promise<{
             timeout: 60000
         });
 
-        await page.waitForSelector('.company-list', { visible: true });
+        await page.waitForSelector('body', { visible: true });
+
+        // Check if company-list elements exist
+        const hasCompanyList = await page.evaluate(() => {
+            return document.querySelectorAll('.company-list').length > 0;
+        });
+
+        if (!hasCompanyList) {
+            console.log(chalk.red('No companies found. No Available IPOs.'));
+            await browser.close();
+            return;
+        }
 
         const html = await page.content();
         const companies = await parseCompanies(html);
@@ -96,7 +107,14 @@ export const parseCompanies = async (html: string): Promise<CompanyInfo[]> => {
         const companies: CompanyInfo[] = [];
 
         // Select all divs with class "company-list"
-        $('.company-list').each((_, element) => {
+        const companyListElements = $('.company-list');
+
+        if (companyListElements.length === 0) {
+            console.log(chalk.red('No companies found. No Available IPOs.'));
+            return companies;
+        }
+
+        companyListElements.each((_, element) => {
             try {
                 // Extract company name
                 const name = $(element).find('span[tooltip="Company Name"]').text().trim();

@@ -14,7 +14,7 @@ export const applyForIPO = async (opts: any) => {
             const session = await checkAvailableOptions();
 
             if (!session) {
-                console.log(chalk.red('Login failed. Please check your credentials and try again.'));
+                console.log(chalk.red('Process stopped due to an error. Please check the error message above.'));
                 return
             }
 
