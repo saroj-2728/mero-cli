@@ -2,7 +2,7 @@ import chalk from "chalk";
 import inquirer from "inquirer";
 
 import type { Credentials } from "../types/credentials.js";
-import { saveCredentials } from "../config.js";
+import { saveCredentials } from "../lib/credentials.js";
 
 export const getUserInfo = async (): Promise<Credentials> => {
     const answers = await inquirer.prompt([

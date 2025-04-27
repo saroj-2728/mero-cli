@@ -5,7 +5,7 @@ import * as cheerio from "cheerio";
 
 import { login } from "./login.js";
 import { showUserInfo } from "../commands/showUserInfo.js";
-import { loadCredentials } from "../config.js";
+import { loadCredentials } from "../lib/credentials.js";
 
 import type { CompanyInfo } from "../types/companyInfo.js";
 import { Credentials } from "../types/credentials.js";

@@ -2,7 +2,7 @@ import chalk from "chalk";
 import inquirer from "inquirer";
 
 import { checkAvailableOptions, listCompanies } from "../scrape/checkAvailableOptions.js"
-import { loadCredentials } from "../config.js";
+import { loadCredentials } from "../lib/credentials.js";
 import { CompanyInfo } from "../types/companyInfo.js";
 
 import type { Session } from "../types/scraper.d.ts";

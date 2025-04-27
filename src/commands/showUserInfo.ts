@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { loadCredentials } from "../config.js";
+import { loadCredentials } from "../lib/credentials.js";
 import type { Credentials } from "../types/credentials.js";
 
 export const showUserInfo = async (showPassword: string | null): Promise<void> => {

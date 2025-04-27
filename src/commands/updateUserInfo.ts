@@ -3,7 +3,7 @@ import inquirer from "inquirer"
 
 import type { Credentials } from "../types/credentials.js"
 import { showUserInfo } from "./showUserInfo.js"
-import { loadCredentials, saveCredentials } from "../config.js"
+import { loadCredentials, saveCredentials } from "../lib/credentials.js"
 
 
 export const updateUserInfo = async (): Promise<void> => {

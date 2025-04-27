@@ -1,12 +1,12 @@
 import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import type { Credentials } from './types/credentials.js';
+import type { Credentials } from '../types/credentials.js';
 
 // Get the directory name using import.meta.url in ES module
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const configFilePath = path.join(__dirname, 'assets', 'config.json');
+const configFilePath = path.join(__dirname, '..', 'assets', 'config.json');
 
 
 // Function to save credentials for a specific user
