@@ -2,16 +2,15 @@ import chalk from "chalk";
 import { loadCredentials } from "../lib/credentials.js";
 import type { Credentials } from "../types/credentials.js";
 
-export const showUserInfo = async (showPassword: string | null): Promise<void> => {
+export const showUserInfo = async (): Promise<void> => {
     try {
         const credentials: Credentials[] = await loadCredentials();
         if (credentials && Array.isArray(credentials) && credentials.length > 0) {
-            if (!showPassword) {
                 credentials.forEach((credential) => {
-                    credential.password = credential.password.replace(/./g, '*');
-                    credential.pin = credential.pin.replace(/./g, '*');
+                    credential.password = '********';
+                    credential.pin = '****';
+                    credential.crnNumber = '********'
                 });
-            }
             console.log(chalk.green('Saved Credentials:'));
             console.table(credentials)
         }

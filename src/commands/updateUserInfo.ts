@@ -7,13 +7,13 @@ import { loadCredentials, saveCredentials } from "../lib/credentials.js"
 
 
 export const updateUserInfo = async (): Promise<void> => {
-    await showUserInfo(null);
+    await showUserInfo();
 
     const credentials: Credentials[] = await loadCredentials();
 
     if (!credentials || credentials.length === 0) {
         console.log(chalk.red('No saved credentials found. Please save credentials first.'));
-        console.log('Help:\n Use the command: mero-cli save -u <username> -p <password> -d <depository-participant-id>');
+        console.log('Help:\n Use the command: mero-cli save to save your credentials.');
         return;
     }
 
@@ -80,9 +80,9 @@ export const updateUserInfo = async (): Promise<void> => {
 
     try {
         await saveCredentials(answers);
-        console.log(chalk.green('Login information updated successfully!'));
+        console.log(chalk.green('Credentials updated successfully!'));
     }
     catch (err: any) {
-        console.log(chalk.red('Error updating login information!', err?.message));
+        console.log(chalk.red('Error updating credentials!', err?.message));
     }
 }

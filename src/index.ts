@@ -39,9 +39,9 @@ program
 program
   .command('show')
   .description('Show saved credentials')
-  .option('-p, --password', 'Show password')
-  .action(async (otps) => {
-    await showUserInfo(otps?.password);
+  // .option('-p, --password', 'Show password')
+  .action(async () => {
+    await showUserInfo();
   });
 
 

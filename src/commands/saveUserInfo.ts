@@ -51,9 +51,9 @@ export const saveUserInfo = async (): Promise<void> => {
 
         await saveCredentials(credentials);
 
-        console.log(chalk.green('Login information saved successfully!'));
+        console.log(chalk.green('Credentials saved successfully!'));
     }
     catch (err: any) {
-        console.log(chalk.red('Error saving login information:'), err?.message);
+        console.log(chalk.red('Error saving credentials:'), err?.message);
     }
 }

@@ -32,7 +32,7 @@ export const applyForIPO = async (opts: any) => {
 
         }
         else {
-            const credentials = await loadCredentials();
+            const credentials = await loadCredentials(true);
             for (const credential of credentials) {
                 const session = await listCompanies(credential);
                 if (!session) {

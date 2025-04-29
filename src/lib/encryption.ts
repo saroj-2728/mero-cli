@@ -26,6 +26,9 @@ export const getSecretKey = async () => {
             const newKey = crypto.randomBytes(keyLength);
             await fs.ensureDir(path.dirname(secretKeyFilePath));
             await fs.writeFile(secretKeyFilePath, newKey);
+
+            console.log('\n🔐 Secret key generated and saved.\n');
+
             return newKey;
         }
     } 

@@ -18,9 +18,9 @@ export const checkAvailableOptions = async (): Promise<{
     creds: { crnNumber: string; pin: string; }
 } | undefined> => {
     try {
-        await showUserInfo(null);
+        await showUserInfo();
 
-        const credentials = await loadCredentials();
+        const credentials = await loadCredentials(true);
 
         if (!credentials || credentials.length === 0) {
             console.log(chalk.red("No saved credentials found. Please save credentials first."));

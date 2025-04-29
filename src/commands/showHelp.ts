@@ -9,7 +9,7 @@ export function showDetailedHelp() {
         console.log(chalk.green('Save credentials:'), '\n\t mero-cli save (Values will be prompted)');
         console.log(chalk.green('Update credentials:'), '\n\t mero-cli update (Values will be prompted)');
         console.log(chalk.green('Show credentials:'),'\n\t mero-cli show');
-        console.log(chalk.green('Show credentials with password:'), '\n\t mero-cli show -p');
+        // console.log(chalk.green('Show credentials with password:'), '\n\t mero-cli show -p');
 
         console.log(chalk.green('Show detailed help:'), '\n\t mero-cli help -d');
         console.log(chalk.green('Check available IPOs:'), '\n\t mero-cli aipos');
